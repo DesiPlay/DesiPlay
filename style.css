@@ -57,3 +57,6 @@ footer { background:var(--dark); border-top:1px solid var(--border); padding:40p
 .footer-copy { color:var(--text2); font-size:13px; }
 
 @media(max-width:640px) { nav { padding:0 3%; } .nav-links { display:flex; gap:12px; margin-left:12px; overflow-x:auto; white-space:nowrap; scrollbar-width:none; } .nav-links::-webkit-scrollbar { display:none; } .nav-links a { font-size:11px; } .nav-cta { display:none; } .footer-top { flex-direction:column; } }
+
+/* Respect the HTML hidden attribute when filtering game cards. */
+.game-big-card[hidden] { display:none !important; }
