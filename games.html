@@ -49,20 +49,20 @@
 <div class="page-hero">
   <div class="page-hero-bg"></div>
   <h1>🎮 सभी Games</h1>
-  <p>10+ games — सब offline, सब free, सब Hindi में!</p>
+  <p>7 game guides अभी उपलब्ध हैं। Playable versions पर काम जारी है।</p>
 </div>
 
 <section class="section" style="padding-top:0">
   <div class="filter-bar reveal">
-    <button class="filter-btn active">सभी</button>
-    <button class="filter-btn">Board Games</button>
-    <button class="filter-btn">Strategy</button>
-    <button class="filter-btn">Card Games</button>
-    <button class="filter-btn">Skill Games</button>
+    <button class="filter-btn active" data-filter="all">सभी</button>
+    <button class="filter-btn" data-filter="board">Board Games</button>
+    <button class="filter-btn" data-filter="strategy">Strategy</button>
+    <button class="filter-btn" data-filter="cards">Card Games</button>
+    <button class="filter-btn" data-filter="skill">Skill Games</button>
   </div>
 
   <div class="games-big-grid">
-    <a href="games/ludo.html" class="game-big-card reveal" style="--gc:rgba(255,165,0,0.15)">
+    <a href="games/ludo.html" class="game-big-card reveal" data-category="board" style="--gc:rgba(255,165,0,0.15)">
       <div class="game-card-top" style="background:linear-gradient(135deg,rgba(255,165,0,0.08),transparent)">
         <span class="game-card-badge badge-hot">🔥 HOT</span>
         <span class="game-card-emoji">🎲</span>
@@ -72,7 +72,7 @@
       <div class="game-card-bottom"><span class="game-card-players">👥 2-4 Players</span><span class="game-card-link">खेलो →</span></div>
     </a>
 
-    <a href="games/chess.html" class="game-big-card reveal">
+    <a href="games/chess.html" class="game-big-card reveal" data-category="strategy">
       <div class="game-card-top" style="background:linear-gradient(135deg,rgba(100,100,255,0.08),transparent)">
         <span class="game-card-emoji">♟️</span>
         <div class="game-card-name">Chess / शतरंज</div>
@@ -81,7 +81,7 @@
       <div class="game-card-bottom"><span class="game-card-players">👥 2 Players</span><span class="game-card-link">खेलो →</span></div>
     </a>
 
-    <a href="games/carrom.html" class="game-big-card reveal">
+    <a href="games/carrom.html" class="game-big-card reveal" data-category="skill">
       <div class="game-card-top" style="background:linear-gradient(135deg,rgba(0,200,100,0.08),transparent)">
         <span class="game-card-badge badge-new">✨ NEW</span>
         <span class="game-card-emoji">🎯</span>
@@ -91,7 +91,7 @@
       <div class="game-card-bottom"><span class="game-card-players">👥 2-4 Players</span><span class="game-card-link">खेलो →</span></div>
     </a>
 
-    <a href="games/pool.html" class="game-big-card reveal">
+    <a href="games/pool.html" class="game-big-card reveal" data-category="skill">
       <div class="game-card-top" style="background:linear-gradient(135deg,rgba(255,50,100,0.08),transparent)">
         <span class="game-card-emoji">🎱</span>
         <div class="game-card-name">Pool / 8-Ball</div>
@@ -100,7 +100,7 @@
       <div class="game-card-bottom"><span class="game-card-players">👥 2 Players</span><span class="game-card-link">खेलो →</span></div>
     </a>
 
-    <a href="games/snake.html" class="game-big-card reveal">
+    <a href="games/snake.html" class="game-big-card reveal" data-category="board">
       <div class="game-card-top" style="background:linear-gradient(135deg,rgba(150,50,255,0.08),transparent)">
         <span class="game-card-emoji">🐍</span>
         <div class="game-card-name">Snake & Ladder</div>
@@ -109,7 +109,7 @@
       <div class="game-card-bottom"><span class="game-card-players">👥 2-6 Players</span><span class="game-card-link">खेलो →</span></div>
     </a>
 
-    <a href="games/tictactoe.html" class="game-big-card reveal">
+    <a href="games/tictactoe.html" class="game-big-card reveal" data-category="strategy">
       <div class="game-card-top" style="background:linear-gradient(135deg,rgba(255,200,0,0.08),transparent)">
         <span class="game-card-emoji">✏️</span>
         <div class="game-card-name">Tic Tac Toe</div>
@@ -118,7 +118,7 @@
       <div class="game-card-bottom"><span class="game-card-players">👥 2 Players</span><span class="game-card-link">खेलो →</span></div>
     </a>
 
-    <a href="games/cards.html" class="game-big-card reveal">
+    <a href="games/cards.html" class="game-big-card reveal" data-category="cards">
       <div class="game-card-top" style="background:linear-gradient(135deg,rgba(255,100,50,0.08),transparent)">
         <span class="game-card-badge badge-new">✨ NEW</span>
         <span class="game-card-emoji">🃏</span>
@@ -161,7 +161,7 @@
 <script>
 const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*80)})},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
-document.querySelectorAll('.filter-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');});});
+document.querySelectorAll('.filter-btn').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const filter=btn.dataset.filter;document.querySelectorAll('.game-big-card').forEach(card=>{const show=filter==='all'||card.dataset.category===filter||card.classList.contains('coming-soon');card.hidden=!show;});});});
 </script>
 </body>
 </html>
