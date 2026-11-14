@@ -63,11 +63,11 @@
       <p>कोई भी problem हो, suggestion हो, या बस hello कहना हो — हमसे contact करो। हम 24 घंटे में reply करते हैं!</p>
       <div class="contact-item">
         <div class="contact-icon" style="background:rgba(108,71,255,0.15)">📧</div>
-        <div><div class="contact-label">Email</div><div class="contact-val">hello@desiplay.in</div></div>
+        <div><div class="contact-label">Email</div><a class="contact-val" href="mailto:hello@desiplay.in">hello@desiplay.in</a></div>
       </div>
       <div class="contact-item">
         <div class="contact-icon" style="background:rgba(0,200,100,0.15)">📱</div>
-        <div><div class="contact-label">WhatsApp</div><div class="contact-val">+91 98765 43210</div></div>
+        <div><div class="contact-label">WhatsApp</div><div class="contact-val">अभी WhatsApp support उपलब्ध नहीं है</div></div>
       </div>
       <div class="contact-item">
         <div class="contact-icon" style="background:rgba(255,165,0,0.15)">📍</div>
@@ -75,24 +75,24 @@
       </div>
       <div class="contact-item">
         <div class="contact-icon" style="background:rgba(255,50,100,0.15)">⏰</div>
-        <div><div class="contact-label">Reply Time</div><div class="contact-val">24 घंटे के अंदर</div></div>
+        <div><div class="contact-label">Reply Time</div><div class="contact-val">ईमेल पर संपर्क करें</div></div>
       </div>
       <div class="social-row">
-        <a href="#" class="social-btn">📸 Instagram</a>
-        <a href="#" class="social-btn">▶ YouTube</a>
-        <a href="#" class="social-btn">💬 WhatsApp</a>
+        
+        
+        
       </div>
     </div>
 
-    <div class="contact-form reveal">
+    <form class="contact-form reveal" id="contactForm" onsubmit="sendMsg(event)">
       <div style="font-family:'Baloo 2',cursive;font-size:22px;font-weight:700;margin-bottom:24px;">✉️ Message भेजो</div>
       <div class="form-row">
-        <div class="form-group"><label>आपका नाम *</label><input type="text" placeholder="जैसे: Rahul Sharma"></div>
-        <div class="form-group"><label>Email *</label><input type="email" placeholder="your@email.com"></div>
+        <div class="form-group"><label>आपका नाम *</label><input id="senderName" type="text" placeholder="जैसे: Rahul Sharma" required maxlength="80"></div>
+        <div class="form-group"><label>Email *</label><input id="senderEmail" type="email" placeholder="your@email.com" required maxlength="120"></div>
       </div>
       <div class="form-group">
         <label>विषय</label>
-        <select>
+        <select id="messageSubject">
           <option>Game में Problem</option>
           <option>नया Game Suggestion</option>
           <option>Bug Report</option>
@@ -101,10 +101,10 @@
           <option>और कुछ</option>
         </select>
       </div>
-      <div class="form-group"><label>आपका Message *</label><textarea placeholder="अपनी बात लिखो यहाँ..."></textarea></div>
-      <button class="submit-btn" onclick="sendMsg()">📨 Message भेजो</button>
-      <div class="success-msg" id="successMsg">✅ Message मिल गया! हम जल्द reply करेंगे।</div>
-    </div>
+      <div class="form-group"><label>आपका Message *</label><textarea id="messageBody" placeholder="अपनी बात लिखो यहाँ..." required maxlength="4000"></textarea></div>
+      <button class="submit-btn" type="submit">📨 Message भेजो</button>
+      <div class="success-msg" id="successMsg">आपका email app खुलेगा। Send दबाकर message भेजें।</div>
+    </form>
   </div>
 </section>
 
@@ -149,7 +149,7 @@
 <script>
 const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*80)});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
-function sendMsg(){document.getElementById('successMsg').style.display='block';setTimeout(()=>{document.getElementById('successMsg').style.display='none';},4000);}
+function sendMsg(event){event.preventDefault();const name=document.getElementById('senderName').value.trim();const email=document.getElementById('senderEmail').value.trim();const subject=document.getElementById('messageSubject').value;const message=document.getElementById('messageBody').value.trim();if(!name||!email||!message)return;const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\n'+message);document.getElementById('successMsg').style.display='block';document.getElementById('successMsg').textContent='आपका email app खुलेगा। Send दबाकर message भेजें; website message अपने आप नहीं भेजती।';window.location.href='mailto:hello@desiplay.in?subject='+encodeURIComponent('DesiPlay: '+subject)+'&body='+body;}
 </script>
 </body>
 </html>
